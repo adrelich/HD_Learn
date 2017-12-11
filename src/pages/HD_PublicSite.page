@@ -1,0 +1,197 @@
+<apex:page id="HD_PublicSite" standardStylesheets="false" sidebar="false" cache="true" showHeader="false"
+           controller="HD_PublicSiteController">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <head>
+        <apex:slds />
+        <style>
+#livechat-compact-container {
+  position: fixed;
+  right: 0;
+  top: 50px;
+  z-index: 10000;
+}
+
+
+.customStyleGridColumn {
+    margin-left:50px;
+    margin-right:50px;
+}
+
+
+
+
+
+        </style>
+    </head>
+    <body>
+    <apex:pageBlock id="pageBlockPublicSite">
+        <div class="slds-scope">
+            <div class="myapp">
+                <div class="slds-page-header">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <apex:image value="{! $Resource.HouseDealer_Icon }" width="40" height="40"/>
+                        </div>
+                        <div class="slds-media__body">
+                            <h1 class="slds-page-header__title slds-truncate slds-align-middle">House Dealers</h1>
+                            <p class="slds-text-body_small slds-line-height_reset">Public Site</p>
+                        </div>
+                    </div>
+                    <div class="slds-form slds-form_compound">
+                        <div class="btn-chat" id="livechat-compact-container" style="visibility: visible; opacity: 1;">
+                            <div class="btn-holder">
+                                <img id="liveagent_button_online_5730O000000POEz"
+                                     style="display: none; border: 0px none; cursor: pointer"
+                                     onclick="liveagent.startChat('5730O000000POEz')"
+                                     src="https://randommechanic-developer-edition.eu9.force.com/HDPublic/resource/1512386268000/OnlineButtonChat"/>
+                                <img
+                                        id="liveagent_button_offline_5730O000000POEz"
+                                        style="display: none; border: 0px none; "
+                                        src="https://randommechanic-developer-edition.eu9.force.com/HDPublic/resource/1512386289000/OfflineButtonChat"/>
+                                <script type="text/javascript">
+if (!window._laq) { window._laq = []; }
+window._laq.push(function(){liveagent.showWhenOnline('5730O000000POEz', document.getElementById('liveagent_button_online_5730O000000POEz'));
+liveagent.showWhenOffline('5730O000000POEz', document.getElementById('liveagent_button_offline_5730O000000POEz'));
+});
+
+
+
+                                </script>
+
+                                <script type='text/javascript'
+                                        src='https://c.la1-c2-frf.salesforceliveagent.com/content/g/js/41.0/deployment.js'></script>
+                                <script type='text/javascript'>
+liveagent.init('https://d.la1-c2-frf.salesforceliveagent.com/chat', '5720O000000POQG', '00D0O000000rcH4');
+
+
+
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <article class="slds-card">
+                    <div class="slds-card__header slds-grid" style="margin-left:100px;">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__body">
+                                <h2>Create new Lead</h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <form id="formWebToLead" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+                              method="POST">
+                            <select id="lead_source" name="lead_source" style="visibility:hidden;">
+                                <option selected="selected" value="Web">Web</option>
+                            </select>
+                            <div class="slds-form slds-form_stacked" style="margin-left:50px; margin-right:50px;">
+                                <input type="hidden" name='captcha_settings'
+                                       value='{"keyname":"reCAPTCHA","fallback":"true","orgId":"00D0O000000rcH4","ts":""}'/>
+                                <input type="hidden" name="oid" value="00D0O000000rcH4"/>
+                                <input type="hidden" name="retURL"
+                                       value="https://randommechanic-developer-edition.eu9.force.com/HDPublic/"/>
+                                <div class="slds-grid">
+                                    <div class="slds-col customStyleGridColumn">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="first_name">First Name</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="first_name" maxlength="40" name="first_name" size="20"
+                                                       type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="last_name">Last Name</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="last_name" maxlength="80"
+                                                       name="last_name" size="20" type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="email">Email</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="email" maxlength="80" name="email" size="20"
+                                                       type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col customStyleGridColumn">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="company">Company</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="company" maxlength="40" name="company"
+                                                       size="20" type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="city">City</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="city" maxlength="40" name="city" size="20"
+                                                       type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="state">State/Province</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="state" maxlength="20" name="state"
+                                                       size="20" type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col customStyleGridColumn">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="phone">Phone</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="phone" maxlength="40" name="phone" size="20"
+                                                       type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="country">Country</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="country" maxlength="40" name="country"
+                                                       size="20" type="text" class="slds-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="title">Title</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="title" maxlength="40" name="title" size="20" type="text"
+                                                       class="slds-input"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col customStyleGridColumn">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label"
+                                                   for="description">Description</label>
+                                            <div class="slds-form-element__control">
+                                                <textarea name="description" class="slds-textarea"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-grid customStyleGridColumn" style="padding-top:10px;">
+                                    <div class="slds-col customStyleGridColumn">
+                                        <div class="g-recaptcha"
+                                             data-sitekey="6LfnnzsUAAAAADsX04-IHh06ClnWZeRNd3xNSsVW"></div>
+                                    </div>
+                                    <div class="slds-col customStyleGridColumn">
+                                        <input type="submit" class="slds-button slds-button--neutral" name="submit"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    </apex:pageBlock>
+    </body>
+    <script>
+    function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500);
+    </script>
+</apex:page>

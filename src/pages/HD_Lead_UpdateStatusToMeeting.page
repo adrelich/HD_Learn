@@ -1,0 +1,61 @@
+<apex:page docType="html-5.0" standardController="Lead" title="Change status">
+    <html>
+    <head>
+        <script src="/canvas/sdk/js/publisher.js"/>
+        <apex:slds />
+    </head>
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Lead" fields="Id,Status"/>
+    </apex:remoteObjects>
+    <body>
+    <apex:form >
+        <div class="mypage">
+            <div class="myapp">
+                <div class="slds-form-element">
+                    <p>Are you sure ?</p>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size--1-of-1">
+                        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around--x-small slds-theme_default"
+                             onclick="changeStatusToMeeting()">Yes
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size--1-of-1">
+                        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around--x-small slds-theme_default"
+                             onclick="closeModal()">No
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </apex:form>
+    </body>
+    </html>
+
+
+    <script>
+        var LeadId = "{!Lead.Id}";
+        var LeadStatus = "{!Lead.Status}";
+
+        function changeStatusToMeeting() {
+            var leadItem = new SObjectModel.Lead();
+
+
+            if(LeadStatus == 'Meeting') {
+                 alert('Already on Meeting');
+            } else if (LeadStatus == 'Open') {
+                leadItem.update([LeadId], {Status: 'Meeting'});
+                Sfdc.canvas.publisher.publish({ name: "publisher.close", payload: {refresh:"true", successMessage: 'Success!'}});
+                Sfdc.canvas.publisher.publish({ name : "publisher.refresh", payload :{feed:true}});
+            } else {
+                alert('You can proceed to Meeting only from Status Open');
+            }
+        }
+
+        function closeModal() {
+            Sfdc.canvas.publisher.publish({ name: "publisher.close", payload: {refresh:"true"}});
+        }
+
+
+    </script>
+</apex:page>
